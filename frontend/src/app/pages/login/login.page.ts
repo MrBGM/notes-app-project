@@ -92,9 +92,13 @@ export class LoginPage {
         },
         error: async (error) => {
           this.loading = false;
+          const message =
+            error.status === 401
+              ? 'Email ou mot de passe incorrect. Vérifiez vos identifiants ou créez un compte.'
+              : (error.error?.error as string) || 'Erreur de connexion. Vérifiez que le backend tourne sur http://localhost:3000';
           const toast = await this.toastController.create({
-            message: error.error?.error || 'Erreur de connexion',
-            duration: 3000,
+            message,
+            duration: 4000,
             color: 'danger',
             position: 'top',
           });

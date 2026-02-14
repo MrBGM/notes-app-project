@@ -17,7 +17,7 @@ npm --version    # doit être >= 10
 ```bash
 cd backend
 npm install
-docker-compose up -d && npm run prisma:generate && npm run prisma:migrate && npm run dev
+docker-compose up -d && npm run prisma:generate && npm run prisma:migrate && npm run prisma:seed && npm run dev
 ```
 
 ✅ Backend démarré sur http://localhost:3000
@@ -49,17 +49,18 @@ npm run cap:sync
 npm run android:build
 ```
 
-APK disponible dans : `frontend/android/app/build/outputs/apk/debug/`
+APK disponible dans : `frontend/android/app/build/outputs/apk/debug/`  
+Pour **tester l’APK sur un téléphone** (configurer l’IP du PC, backend, même Wi‑Fi) : voir **[GUIDE_TEST_APK.md](GUIDE_TEST_APK.md)**.
 
 ## 🔑 Comptes de Test
 
-Si vous voulez tester sans créer de compte :
+Un utilisateur de test est créé automatiquement si vous avez lancé `npm run prisma:seed` (inclus dans la commande backend ci‑dessus).
 
-**Utilisateur 1**
-- Email: `etudiant@test.com`
-- Mot de passe: `password123`
+**Utilisateur de test**
+- Email : `etudiant@test.com`
+- Mot de passe : `password123`
 
-(Créez ce compte via l'inscription)
+Vous pouvez vous connecter directement avec ce compte, ou créer le vôtre via « S'inscrire ».
 
 ## 🐛 Problèmes Courants
 
@@ -155,14 +156,5 @@ Les deux serveurs se rechargent automatiquement à chaque modification !
 - Backend : Console logs + Prisma Studio (`npm run prisma:studio`)
 - Frontend : Chrome DevTools (F12)
 
-## 🎓 Pour Aller Plus Loin
-
-- Ajoutez des tests unitaires
-- Implémentez la pagination
-- Ajoutez des graphiques avec Chart.js
-- Intégrez les notifications push
-- Créez une version web (PWA)
 
 ---
-
-**Bon développement ! 🚀**

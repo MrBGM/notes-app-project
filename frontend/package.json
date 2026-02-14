@@ -16,8 +16,8 @@
     "cap:sync": "npx cap sync",
     "cap:open": "npx cap open android",
     "cap:run": "npx cap run android",
-    "android:build": "npm run build:prod && npm run cap:sync && cd android && gradlew assembleDebug",
-    "android:release": "npm run build:prod && npm run cap:sync && cd android && gradlew assembleRelease"
+    "android:build": "npm run build:prod && npm run cap:sync && cd android && gradlew.bat assembleDebug",
+    "android:release": "npm run build:prod && npm run cap:sync && cd android && gradlew.bat assembleRelease"
   },
   "private": true,
   "dependencies": {

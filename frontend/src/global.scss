@@ -1,5 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
+/* Rendu identique sur APK / WebView : pleine hauteur + safe area */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+}
+body {
+  font-family: var(--ion-font-family);
+  font-size: 16px; /* évite le zoom auto sur champs dans la WebView Android */
+  background: #1e1b4b; /* fond de secours si ion-content met du temps à peindre */
+}
+ion-app {
+  height: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+ion-content {
+  --padding-top: env(safe-area-inset-top);
+  --padding-bottom: env(safe-area-inset-bottom);
+  --padding-start: env(safe-area-inset-left);
+  --padding-end: env(safe-area-inset-right);
+  --background: transparent; /* les pages définissent leur fond (ex: gradient login) */
+}
+
+/* Évite le zoom au focus sur Android */
+input, select, textarea {
+  font-size: 16px !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -87,13 +121,34 @@
   background-clip: text;
 }
 
-/* Ionic overrides */
+/* Ionic overrides - visibles aussi sur APK / WebView Android */
 ion-input, ion-textarea {
   --padding-start: 16px;
   --padding-end: 16px;
-  --background: rgba(255, 255, 255, 0.9);
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --background: #f1f5f9;
+  --color: #1e293b;
+  --placeholder-color: #64748b;
+  --placeholder-opacity: 1;
+  min-height: 48px !important;
+  --min-height: 48px;
+  opacity: 1 !important;
   border-radius: 14px;
   transition: all 0.3s ease;
+  display: block !important;
+}
+
+/* Force la hauteur des lignes de formulaire (login, register) sur WebView */
+ion-item.input-item,
+.input-item {
+  --background: #f8fafc;
+  --min-height: 52px;
+  min-height: 52px !important;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  border-radius: 14px;
+  opacity: 1 !important;
 }
 
 ion-item { --border-radius: 14px; --inner-padding-end: 0; --padding-start: 0; }
@@ -103,8 +158,27 @@ ion-button {
   font-weight: 600;
   text-transform: none;
   transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 48px !important;
+  opacity: 1 !important;
 }
 ion-button:active { transform: scale(0.97); }
+
+/* FAB et boutons flottants visibles sur APK */
+ion-fab {
+  z-index: 999;
+  opacity: 1 !important;
+}
+ion-fab-button {
+  --background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+  opacity: 1 !important;
+  min-width: 56px;
+  min-height: 56px;
+}
+ion-fab-button ion-icon {
+  font-size: 28px;
+  color: white;
+}
 
 ion-tab-bar {
   --background: rgba(255, 255, 255, 0.95);
